@@ -20,8 +20,12 @@ CacheManager::CacheManager(int cacheSize, int cacheLineSize, int cacheAccessCycl
 
 void CacheManager::accessCache(string accessLine) {
     if (accessLine[0] == 'I') {
+        cout << "Accessing instruction cache..." << endl;
+        cout << "Accessing address " << accessLine.substr(2) << "..." << endl;
         this->accessCacheInternal(stoi(accessLine.substr(2)), this->instructionCache);
     } else if (accessLine[0] == 'D') {
+        cout << "Accessing data cache..." << endl;
+        cout << "Accessing address " << accessLine.substr(2) << "..." << endl;
         this->accessCacheInternal(stoi(accessLine.substr(2)), this->dataCache);
     } else {
         cout << "Invalid access type." << endl;
@@ -87,4 +91,17 @@ void CacheManager::accessCacheInternal(int access, vector<string> &cache) {
     cout << "Tag: " << tag << endl;
     cout << "Index: " << index << endl;
     cout << "Hit: " << (hit ? "Yes" : "No") << endl;
+}
+
+void CacheManager::printStatistics() {
+    hitRate = numberOfHits * 100 / numberOfAccesses;
+    missRate = numberOfMisses * 100 / numberOfAccesses;
+    averageAccessTime = (numberOfHits * cacheAccessCycles + numberOfMisses * (cacheAccessCycles + memoryAccessCycles)) / numberOfAccesses;
+
+    cout << "Number of hits: " << numberOfHits << endl;
+    cout << "Number of misses: " << numberOfMisses << endl;
+    cout << "Number of accesses: " << numberOfAccesses << endl;
+    cout << "Hit rate: " << hitRate << "%" << endl;
+    cout << "Miss rate: " << missRate << "%" << endl;
+    cout << "Average access time: " << averageAccessTime << " cycles" << endl;
 }
