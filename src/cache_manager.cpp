@@ -105,3 +105,18 @@ void CacheManager::printStatistics() {
     cout << "Miss rate: " << missRate << "%" << endl;
     cout << "Average access time: " << averageAccessTime << " cycles" << endl;
 }
+
+void CacheManager::printCache() {
+    cout << "Direct Mapped Cache Contents:" << endl;
+    for (int i = 0; i < this->numberOfCacheLines; ++i) {
+        cout << "Cache Line " << i << ": ";
+        // Assuming that an empty string in the cache vector indicates an empty line
+        if (this->instructionCache[i].empty()) {
+            cout << "empty";
+        } else {
+            cout << "Tag: " << this->instructionCache[i];
+        }
+        cout << endl;
+    }
+   
+}
