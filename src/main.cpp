@@ -49,8 +49,6 @@ int main() {
     cout << "Starting simulation..." << endl;
     cout << "Cache is empty." << endl;
 
-    cout << "Address\t\tTag\t\tData\t\tValid" << endl; // Todo: Make sure this is the right format
-
     while (getline(file, line)) {
         cout << endl
              << endl

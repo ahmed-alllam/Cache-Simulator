@@ -14,6 +14,7 @@ class CacheManager {
         int cacheAccessCycles;
         int cacheMode;
         int mWay;
+        int memoryAccessCycles = 120;
 
         // statistics
         int numberOfHits = 0;
@@ -27,11 +28,12 @@ class CacheManager {
         vector<string> instructionCache;
         vector<string> dataCache;
         
-        void accessInstruction(int access);
-        void accessData(int access);
+        void accessCacheInternal(int access, vector<string> &cache);
     public:
         CacheManager(int cacheSize, int cacheLineSize, int cacheAccessCycles, int cacheMode, int mWay);
         void accessCache(string accessLine);
         void printStatistics();
         void printCache();
 };
+
+const size_t memoryAddressSize = 24;
