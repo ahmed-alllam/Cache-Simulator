@@ -56,7 +56,7 @@ int main() {
              << endl
              << "========================================" << endl
              << endl;
-        cacheManager.accessMemory(stoi(line)); // Todo: Make sure this is the right format
+        cacheManager.accessCache(line);
         cacheManager.printCache();
     }
 

@@ -7,6 +7,7 @@ using namespace std;
 
 class CacheManager {
     private:
+        // configuration
         int cacheSize;
         int numberOfCacheLines;
         int cacheLineSize;
@@ -21,9 +22,16 @@ class CacheManager {
         int hitRate = 0;
         int missRate = 0;
         int averageAccessTime = 0;
+
+        // cache
+        vector<string> instructionCache;
+        vector<string> dataCache;
+        
+        void accessInstruction(int access);
+        void accessData(int access);
     public:
         CacheManager(int cacheSize, int cacheLineSize, int cacheAccessCycles, int cacheMode, int mWay);
-        void accessMemory(int address);
+        void accessCache(string accessLine);
         void printStatistics();
         void printCache();
 };
