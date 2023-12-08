@@ -7,79 +7,123 @@
 
 using namespace std;
 
-int main() {
-    cout << "Hello and Welcome to our Cache Simulator!" << endl;
+int main()
+{
+     cout << "Hello and Welcome to our Cache Simulator!" << endl;
 
-    cout << "Please enter the total size of the cache in Bytes: ";
-    int cacheSize;
-    cin >> cacheSize;
+     cout << "Please enter the total size of the cache in Bytes: ";
+     int cacheSize;
+     cin >> cacheSize;
 
-    // Todo: validate all inputs
+     if ((cacheSize & (cacheSize - 1)) != 0)
+     {
+          cout << "Invalid cache size. Must be a power of 2." << endl;
+          return 1;
+     }
 
-    cout << "Please enter the cache line size in Bytes: ";
-    int cacheLineSize;
-    cin >> cacheLineSize;
+     cout << "Please enter the cache line size in Bytes: ";
+     int cacheLineSize;
+     cin >> cacheLineSize;
 
-    cout << "Please enter the number of cycles to access the cache: ";
-    int cacheAccessCycles;
-    cin >> cacheAccessCycles;
+     if ((cacheLineSize & (cacheLineSize - 1)) != 0)
+     {
+          cout << "Invalid cache line size. Must be a power of 2." << endl;
+          return 1;
+     }
 
-    cout << "Please enter cache mode (0 for Direct Mapped, 1 for Fully Associative, 2 for m-way Set Associative): ";
-    int cacheMode;
-    cin >> cacheMode;
+     cout << "Please enter the number of cycles to access the cache: ";
+     int cacheAccessCycles;
+     cin >> cacheAccessCycles;
 
-    int mWay = 0;
+     if (cacheAccessCycles < 1 && cacheAccessCycles > 10)
+     {
+          cout << "Invalid number of cycles to access the cache. Must be between 1 and 10." << endl;
+          return 1;
+     }
 
-    if (cacheMode == 1) {
-        cout << "Please enter the m-way for set associative: ";
-        cin >> mWay;
-    }
+     cout << "Please enter cache mode (0 for Direct Mapped, 1 for Fully Associative, 2 for m-way Set Associative): ";
+     int cacheMode;
+     cin >> cacheMode;
 
-    cout << "Please enter the path of the file containing the memory accesses: ";
-    string filePath;
-    cin >> filePath;
+     if (cacheMode < 0 && cacheMode > 2)
+     {
+          cout << "Invalid cache mode. Must be 0, 1 or 2." << endl;
+          return 1;
+     }
 
-    CacheManager cacheManager(cacheSize, cacheLineSize, cacheAccessCycles, cacheMode, mWay);
+     int mWay = 0;
 
-    ifstream file(filePath);
-    string line;
+     if (cacheMode == 1)
+     {
+          cout << "Please enter the m-way for set associative: ";
+          cin >> mWay;
+     }
 
-    cout << endl << endl << endl << "========================================" << endl << endl << endl;
+     if (mWay < 1 || mWay & (mWay - 1) != 0 || mWay > cacheSize / cacheLineSize)
+     {
+          cout << "Invalid m-way. Must be a power of 2. Must be less than or equal to cache size / cache line size." << endl;
+          return 1;
+     }
 
-    cout << "Starting simulation..." << endl;
-    cout << "Cache is empty." << endl;
+     cout << "Please enter the path of the file containing the memory accesses: ";
+     string filePath;
+     cin >> filePath;
 
-    while (getline(file, line)) {
-        cout << endl
-             << endl
-             << "========================================" << endl
-             << endl;
-        cacheManager.accessCache(line);
-        cacheManager.printCache();
-    }
+     CacheManager cacheManager(cacheSize, cacheLineSize, cacheAccessCycles, cacheMode, mWay);
 
-    cout << endl
-         << endl
-         << "========================================" << endl
-         << endl;
+     ifstream file(filePath);
 
-    cout << "Simulation finished." << endl;
+     if (!file.is_open())
+     {
+          cout << "Invalid file path." << endl;
+          return 1;
+     }
 
-    cout << endl
-         << endl
-         << "========================================" << endl
-         << endl;
+     string line;
 
-    cout << "Printing statistics..." << endl << endl;
+     cout << endl
+          << endl
+          << endl
+          << "========================================" << endl
+          << endl
+          << endl;
 
-    cacheManager.printStatistics();
+     cout << "Starting simulation..." << endl;
+     cout << "Cache is empty." << endl;
 
-    cout << endl
-         << endl
-         << "========================================" << endl
-         << endl;
+     while (getline(file, line))
+     {
+          cout << endl
+               << endl
+               << "========================================" << endl
+               << endl;
+          cacheManager.accessCache(line);
+          cacheManager.printCache();
+     }
 
-    cout << "Thank you for using our Cache Simulator!" << endl;
+     cout << endl
+          << endl
+          << "========================================" << endl
+          << endl;
 
-    return 0;
+     cout << "Simulation finished." << endl;
+
+     cout << endl
+          << endl
+          << "========================================" << endl
+          << endl;
+
+     cout << "Printing statistics..." << endl
+          << endl;
+
+     cacheManager.printStatistics();
+
+     cout << endl
+          << endl
+          << "========================================" << endl
+          << endl;
+
+     cout << "Thank you for using our Cache Simulator!" << endl;
+
+     return 0;
 }
