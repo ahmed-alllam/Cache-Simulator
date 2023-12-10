@@ -20,9 +20,9 @@ class CacheManager {
         int numberOfHits = 0;
         int numberOfMisses = 0;
         int numberOfAccesses = 0;
-        int hitRate = 0;
-        int missRate = 0;
-        int averageAccessTime = 0;
+        float hitRate = 0.0;
+        float missRate = 0.0;
+        float averageAccessTime = 0.0;
 
         // cache
         vector<string> instructionCache;

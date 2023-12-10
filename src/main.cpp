@@ -25,9 +25,9 @@ int main()
      int cacheLineSize;
      cin >> cacheLineSize;
 
-     if ((cacheLineSize & (cacheLineSize - 1)) != 0)
+     if ((cacheLineSize & (cacheLineSize - 1)) != 0 || cacheLineSize >= cacheSize)
      {
-          cout << "Invalid cache line size. Must be a power of 2." << endl;
+          cout << "Invalid cache line size. Must be a power of 2, and less than cache size." << endl;
           return 1;
      }
 
@@ -53,13 +53,13 @@ int main()
 
      int mWay = 0;
 
-     if (cacheMode == 1)
+     if (cacheMode == 2)
      {
           cout << "Please enter the m-way for set associative: ";
           cin >> mWay;
      }
 
-     if (mWay < 1 || mWay & (mWay - 1) != 0 || mWay > cacheSize / cacheLineSize)
+     if (cacheMode == 2 && (mWay < 1 || mWay & (mWay - 1) != 0 || mWay > cacheSize / cacheLineSize))
      {
           cout << "Invalid m-way. Must be a power of 2. Must be less than or equal to cache size / cache line size." << endl;
           return 1;
@@ -93,6 +93,12 @@ int main()
 
      while (getline(file, line))
      {
+
+          if (line.size() < 3)
+          {
+               continue;
+          }
+
           cout << endl
                << endl
                << "========================================" << endl
