@@ -1,0 +1,8 @@
+December 9:
+	Implemented the basic structure for data cache and instruction cache printing.
+
+December 10:
+	Refined the printing mechanisms to display data cache and instruction cache details more clearly.
+
+December 11: 
+	Finalized and tested the printing functionalities for both data and instruction caches.

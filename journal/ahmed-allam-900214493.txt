@@ -1,0 +1,27 @@
+Date:   Mon Dec 11 18:14:18 2023 +0200
+
+    Added two test cases
+
+Date:   Sun Dec 10 19:31:51 2023 +0200
+
+    Finished the cache simulator
+
+Date:   Fri Dec 8 20:35:36 2023 +0200
+
+    Added input validation
+
+Date:   Fri Dec 8 16:19:57 2023 +0200
+
+    Finished Access Cache function
+
+Date:   Fri Dec 8 15:27:36 2023 +0200
+
+    Added cache tables. Added access cache functions
+
+Date:   Thu Dec 7 22:36:48 2023 +0200
+
+    Added Cache Manager Class. Added Main function
+
+Date:   Thu Dec 7 21:59:40 2023 +0200
+
+    Added initial files

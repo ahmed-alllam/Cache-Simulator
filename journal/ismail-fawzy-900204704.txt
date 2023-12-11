@@ -1,0 +1,7 @@
+Date:   Sun Dec 10 2023
+	Added Calculating statistics of the cache simulator
+
+Date:   Mon Dec 11 2023
+	Added printing all statistics to the user
+
+
